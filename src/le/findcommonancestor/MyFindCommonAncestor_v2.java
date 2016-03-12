@@ -12,7 +12,7 @@ import java.util.Set;
  * Find least common ancestor of two given commits also called merge base, which is an ancestor that is closest to both given commits.
  * 
  * SOLUTION:
- * For each Node, recursively traverse the tree upwards until you hit the root. 
+ * For each Node, recursively traverse the datatype.tree upwards until you hit the root.
  * At each parent node, insert the node into a list. 
  * This should give you list_a and list_b. 
  * Iterate over the shortest list, comparing elements from each list. 

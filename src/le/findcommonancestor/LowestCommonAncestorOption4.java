@@ -9,8 +9,8 @@ import java.util.Set;
 
 /**
  * 1) Create a Map<String, String[]> pointing from commits to its parents. The key in the Map is the commit and the value is its parents
- * 2) Once we have the previous Map we create a Set<String> containing the nodes we visit while traverse the tree up
- * 3) Create a Queue in order to traverse the tree via BFS from the two commits at the same time 
+ * 2) Once we have the previous Map we create a Set<String> containing the nodes we visit while traverse the datatype.tree up
+ * 3) Create a Queue in order to traverse the datatype.tree via BFS from the two commits at the same time
  * 4) The first commit that we cannot add to the Set<String> of traversed commits will be the lowest common ancestor
  * 
  * @author oserna
