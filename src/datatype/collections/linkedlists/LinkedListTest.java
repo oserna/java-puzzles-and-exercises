@@ -1,4 +1,4 @@
-package datatype.collections;
+package datatype.collections.linkedlists;
 
 import static org.junit.Assert.*;
 
@@ -7,7 +7,7 @@ import java.util.Deque;
 
 import org.junit.Test;
 
-import datatype.collections.LinkedListTest.LinkedList.Node;
+import datatype.collections.linkedlists.LinkedListTest.LinkedList.Node;
 
 public class LinkedListTest {
 

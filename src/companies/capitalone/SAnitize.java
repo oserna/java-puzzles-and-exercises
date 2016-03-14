@@ -1,51 +1,42 @@
 package companies.capitalone;
 
-public class SAnitize {
+import java.util.Scanner;
+
+public class Sanitize {
 	
 	public static final String startScript = "<script>";
 	public static final String endScript= "</script>";
  	public static final String startScriptComplete = "<script language=\"JavaScript\">";
 	
 	public static void main(String[] args) {
-		check("2345");
+		
+//		Scanner in = new Scanner(System.in);
+//		
+//		String nextLine = null;
+//		while( in.hasNextLine()){
+//			nextLine = in.nextLine();
+//			System.out.println(check(nextLine));			
+//		}
+		
 
+		check("99447398617");
 	}
 
-	private static String sanitize(String nextLine) {
-		
-		String result = nextLine;
-		int start = nextLine.indexOf(startScript);
-		if (start<0) {
-			start = nextLine.indexOf(startScriptComplete);
-		}
-		if (start>0) {
-			String init = nextLine.substring(0, start);
-			String substring = nextLine.substring(start+startScript.length());
-			int end = substring.indexOf(endScript);
-			if (end>0) {
-				result = init + substring.substring(end+endScript.length());
-			}
-		}
-		
-		return result;
-		
-		
-	}
 	
 	
-	private static void check(String card){
+	private static String check(String card){
+		
+		card = new StringBuilder(card).reverse().toString();
 		
 		char[] charArray = card.toCharArray();
 		int a =0;
 		int b =0;
-		for (int i = charArray.length-1; i >= 0 ; i--) {
-			char c = charArray[i];
+		for (int i = 1; i <= charArray.length; i++) {
+			char c = charArray[i-1];
 			int num = Integer.parseInt(c+"");
-			if(num % 2 == 0){
-				a = a + num;
-			}else{
+			if(i % 2 == 0){
 				int v = num  * 2;
-				if(v>10){
+				if(v >= 10){
 					Integer integer = new Integer(v);
 					char[] charArray2 = integer.toString().toCharArray();
 					int one = Integer.parseInt(charArray2[0]+"");
@@ -54,6 +45,8 @@ public class SAnitize {
 				}else{
 					b = b + v;
 				}
+			}else{
+				a = a + num;
 			}
 			
 		}

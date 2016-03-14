@@ -1,50 +1,52 @@
 package companies.amazon;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NavigableMap;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
 
 
 public class Grades {
 	
-//	public static void main(String[] args) throws IOException{
-//        Scanner in = new Scanner(System.in);
-//        String[] res;
-//        
-//        int _grades_size = Integer.parseInt(in.nextLine());
-//        String[] _grades = new String[_grades_size];
-//        String _grades_item;
-//        for(int _grades_i = 0; _grades_i < _grades_size; _grades_i++) {
-//            try {
-//                _grades_item = in.nextLine();
-//            } catch (Exception e) {
-//                _grades_item = null;
-//            }
-//            _grades[_grades_i] = _grades_item;
-//        }
-//        
-//        res = grade(_grades);
-//        for(int res_i=0; res_i < res.length; res_i++) {
-//        	System.out.println(String.valueOf(res[res_i]));
-//        }
-//    }
+	public static void main(String[] args) throws IOException{
+        Scanner in = new Scanner(System.in);
+        String[] res;
+        
+        int _grades_size = Integer.parseInt(in.nextLine());
+        String[] _grades = new String[_grades_size];
+        String _grades_item;
+        for(int _grades_i = 0; _grades_i < _grades_size; _grades_i++) {
+            try {
+                _grades_item = in.nextLine();
+            } catch (Exception e) {
+                _grades_item = null;
+            }
+            _grades[_grades_i] = _grades_item;
+        }
+        
+        res = grade(_grades);
+        for(int res_i=0; res_i < res.length; res_i++) {
+        	System.out.println(String.valueOf(res[res_i]));
+        }
+    }
 	
-	public static void main(String[] args) {
-		
-		String line1 = "Foo,Bar,79,81,98,40,85";
-		String line2 = "Baz,Quux,90,90,90,90";
-		
-		String[] grade = grade(new String[]{line1, line2});
-		for (int i = 0; i < grade.length; i++) {
-			System.out.println(grade[i]);
-			
-		}
-	}
-	
+//	public static void main(String[] args) {
+//		
+//		String line1 = "Foo,Bar,79,81,98,40,85";
+//		String line2 = "Baz,Quux,90,90,90,90";
+//		
+//		String[] grade = grade(new String[]{line1, line2});
+//		for (int i = 0; i < grade.length; i++) {
+//			System.out.println(grade[i]);
+//			
+//		}
+//	}
+//	
     static String[] grade(String[] grades) {
     	
     	Map<String, int[]> gradesMap = createGrades();
