@@ -1,35 +1,35 @@
 package datatype.tree;
 
-public  class Node {
+public  class Node<T> {
 
-    int value;
+    T value;
 
-    private Node left;
-    private Node right;
+    private Node<T> left;
+    private Node<T> right;
 
-    Node(int value) {
+    Node(T value) {
         this.value = value;
         right = null;
         left = null;
     }
 
-    public int getValue() {
+    public T getValue() {
         return value;
     }
 
-    public Node getLeft() {
+    public Node<T> getLeft() {
         return left;
     }
 
-    public Node getRight() {
+    public Node<T> getRight() {
         return right;
     }
 
-    public void setLeft(Node node) {
+    public void setLeft(Node<T> node) {
         this.left = node;
     }
 
-    public void setRight(Node node) {
+    public void setRight(Node<T> node) {
         this.right = node;
     }
 }

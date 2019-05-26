@@ -1,10 +1,17 @@
 package datatype.tree;
 
-public class BinarySearchTree {
+import java.util.Comparator;
 
-    private static Node head;
+public class BinarySearchTree<T> {
 
-    public static void add(int value) {
+    private  Node<T> head;
+    private Comparator<T> comparator;
+
+    public BinarySearchTree(Comparator<T> comparator){
+        this.comparator = comparator;
+    }
+
+    public void add(T value) {
 
         if (head == null) {
             head = new Node(value);
@@ -15,29 +22,34 @@ public class BinarySearchTree {
 
     }
 
-    private static void add(int value, Node current){
+    private void add(T value, Node<T> current) {
 
-        if (current.getValue() == value){
-                return;
+        if (current.getValue() == value) {
+            return;
         }
 
-        if (value < current.getValue() ) {
-            if(current.getLeft() != null){
-              add(value, current.getLeft());
+        final int compared = comparator.compare(value, current.getValue());
+        if (compared == 0) {
+
+        }
+
+        if (compared < 0) {
+            if (current.getLeft() != null) {
+                add(value, current.getLeft());
             }
 
             current.setLeft(new Node(value));
         } else {
-            if(current.getRight() != null){
+            if (current.getRight() != null) {
                 add(value, current.getRight());
             }
 
             current.setRight(new Node(value));
-        }
 
+        }
     }
 
-    public static Node tree(){
+    public Node<T> tree(){
         return head;
     }
 
