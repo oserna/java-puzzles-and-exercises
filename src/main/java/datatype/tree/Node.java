@@ -32,4 +32,9 @@ public  class Node<T> {
     public void setRight(Node<T> node) {
         this.right = node;
     }
+
+    @Override
+    public String toString() {
+        return value.toString();
+    }
 }

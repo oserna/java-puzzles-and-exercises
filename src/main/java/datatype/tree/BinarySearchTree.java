@@ -14,7 +14,7 @@ public class BinarySearchTree<T> {
     public void add(T value) {
 
         if (head == null) {
-            head = new Node(value);
+            head = new Node<T>(value);
             return;
         }
 
@@ -36,15 +36,17 @@ public class BinarySearchTree<T> {
         if (compared < 0) {
             if (current.getLeft() != null) {
                 add(value, current.getLeft());
+                return;
             }
 
-            current.setLeft(new Node(value));
+            current.setLeft(new Node<T>(value));
         } else {
             if (current.getRight() != null) {
                 add(value, current.getRight());
+                return;
             }
 
-            current.setRight(new Node(value));
+            current.setRight(new Node<T>(value));
 
         }
     }
