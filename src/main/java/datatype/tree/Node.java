@@ -6,6 +6,7 @@ public  class Node<T> {
 
     private Node<T> left;
     private Node<T> right;
+    private boolean visited;
 
     Node(T value) {
         this.value = value;
@@ -37,4 +38,13 @@ public  class Node<T> {
     public String toString() {
         return value.toString();
     }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
 }

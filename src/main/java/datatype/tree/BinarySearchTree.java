@@ -1,6 +1,6 @@
 package datatype.tree;
 
-import java.util.Comparator;
+import java.util.*;
 
 public class BinarySearchTree<T> {
 
@@ -55,6 +55,79 @@ public class BinarySearchTree<T> {
         return head;
     }
 
+    public List<Node<T>> preOrder(){
+
+        final List<Node<T>> preOrder = new ArrayList<>();
+
+        final Deque<Node<T>> nodes = new ArrayDeque<>();
+
+        nodes.addFirst(head);
+
+        while (!nodes.isEmpty()){
+
+            final Node<T> first = nodes.peekFirst();
+
+            if (!first.isVisited()){
+                first.setVisited(true);
+                preOrder.add(first);
+            }
+
+            Node<T> left = first.getLeft();
+            if (left != null && !left.isVisited()) {
+                nodes.addFirst(left);
+                continue;
+            }
+
+            Node<T> right = first.getRight();
+            if (right != null && !right.isVisited()) {
+                nodes.addFirst(right);
+                continue;
+            }
+
+            nodes.removeFirst();
+        }
+
+        return preOrder;
+    }
 
 
+    public List<Node<T>> inOrder(){
+
+        List<Node<T>> inOrder = new ArrayList<>();
+
+        final ArrayDeque<Node<T>> nodes = new ArrayDeque<>();
+
+        nodes.addFirst(head);
+
+        while (nodes.size() > 0) {
+
+            Node<T> first = nodes.peekFirst();
+
+            Node<T> left = first.getLeft();
+            if ( left != null &&  !left.isVisited()) {
+
+                nodes.addFirst(first.getLeft());
+
+                continue;
+            }
+
+            first.setVisited(true);
+            nodes.removeFirst();
+
+            inOrder.add(first);
+
+            Node<T> right = first.getRight();
+            if (right != null && !right.isVisited()) {
+
+                nodes.addFirst(first.getRight());
+
+                continue;
+            }
+
+
+        }
+
+        return inOrder;
+
+    }
 }

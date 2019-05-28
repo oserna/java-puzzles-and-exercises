@@ -3,9 +3,7 @@ package datatype.tree;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayDeque;
-import java.util.Comparator;
-import java.util.Deque;
+import java.util.*;
 
 
 public class TestBinarySearchTree {
@@ -34,7 +32,8 @@ public class TestBinarySearchTree {
          /  \    /  \
        20   40  60   80 */
     @Test
-    public void testTraversePreOrder() {
+    public void testTraverseInOrder() {
+
 
         BinarySearchTree<Integer> bst = new BinarySearchTree<>(comparator);
         bst.add(50);
@@ -45,38 +44,14 @@ public class TestBinarySearchTree {
         bst.add(60);
         bst.add(80);
 
-        Node<Integer> node = bst.tree();
+        List<Node<Integer>> inOrder = bst.preOrder();
 
-        final ArrayDeque<Node<Integer>> nodes = new ArrayDeque<>();
-        nodes.addFirst(node);
+        List<Integer> expected = Arrays.asList(20,30,40,50,60, 70,80);
 
-        while (nodes.size() > 0) {
-
-            Node<Integer> first = nodes.peekFirst();
-
-            if (first.getLeft() != null) {
-
-                nodes.addFirst(first.getLeft());
-
-                continue;
-            }
-
-            System.out.println(first.getValue());
-
-
-            if (first.getRight() != null) {
-
-                nodes.addFirst(first.getRight());
-
-                continue;
-            }
-
-            nodes.removeFirst();
-
+        for (int i = 0; i < inOrder.size(); i++) {
+            Assert.assertTrue(inOrder.get(i).getValue().equals(expected.get(i)));
         }
 
-
     }
-
 
 }
