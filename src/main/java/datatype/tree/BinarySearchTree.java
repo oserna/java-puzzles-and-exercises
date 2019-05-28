@@ -90,7 +90,6 @@ public class BinarySearchTree<T> {
         return preOrder;
     }
 
-
     public List<Node<T>> inOrder(){
 
         List<Node<T>> inOrder = new ArrayList<>();
@@ -130,4 +129,109 @@ public class BinarySearchTree<T> {
         return inOrder;
 
     }
+
+    public List<Node<T>> postOrder() {
+
+        final List<Node<T>> postOrder = new ArrayList<>();
+
+        final Deque<Node<T>> nodes = new ArrayDeque<>();
+
+        nodes.addFirst(head);
+
+        while(!nodes.isEmpty()){
+
+            Node<T> first = nodes.peekFirst();
+
+            Node<T> left = first.getLeft();
+            if (left != null && !left.isVisited()){
+                nodes.addFirst(left);
+                continue;
+            }
+
+            Node<T> right = first.getRight();
+            if (right != null && !right.isVisited()){
+                nodes.addFirst(right);
+                continue;
+            }
+
+            first.setVisited(true);
+
+            nodes.removeFirst();
+
+            postOrder.add(first);
+
+        }
+
+        return postOrder;
+    }
+
+    public List<Node<T>> inOrderRecursive(){
+        return traverseInOrder(head, new ArrayList<>());
+    }
+
+    public List<Node<T>> preOrderRecursive(){
+        return traversePreOrder(head, new ArrayList<>());
+    }
+
+    public List<Node<T>> postOrderRecursive(){
+        return traversePostOrder(head, new ArrayList<>());
+    }
+
+    private List<Node<T>> traversePostOrder(Node<T> node, List<Node<T>> list) {
+
+        Node<T> left = node.getLeft();
+        if (left != null && !left.isVisited()) {
+            traversePostOrder(left, list);
+        }
+
+        Node<T> right = node.getRight();
+        if (right != null && !right.isVisited()) {
+            traversePostOrder(right, list);
+        }
+
+        node.setVisited(true);
+        list.add(node);
+
+        return list;
+
+    }
+
+    private List<Node<T>> traverseInOrder (Node<T> node, List<Node<T>> list) {
+
+        Node<T> left = node.getLeft();
+        if (left != null && !left.isVisited()) {
+            traverseInOrder(left, list);
+        }
+
+        node.setVisited(true);
+        list.add(node);
+
+        Node<T> right = node.getRight();
+        if (right != null && !right.isVisited()) {
+            traverseInOrder(right, list);
+        }
+
+        return list;
+    }
+
+    private List<Node<T>> traversePreOrder (Node<T> node, List<Node<T>> list) {
+
+        if (node.isVisited()) {
+            node.setVisited(true);
+            list.add(node);
+        }
+
+        Node<T> left = node.getLeft();
+        if (left != null && !left.isVisited()) {
+            traversePreOrder(left, list);
+        }
+
+        Node<T> right = node.getRight();
+        if (right != null && !right.isVisited()) {
+            traversePreOrder(right, list);
+        }
+
+        return list;
+    }
+
 }

@@ -8,15 +8,6 @@ import java.util.*;
 
 public class TestBinarySearchTree {
 
-    private static Comparator<Integer> comparator = new Comparator<Integer>() {
-        @Override
-        public int compare(Integer v1, Integer v2) {
-            return v1 < v2 ? -1 : v1 > v2 ? +1 : 0;
-        }
-    };
-
-
-
     @Test
     public void testAddJustRoot() {
 
@@ -26,32 +17,191 @@ public class TestBinarySearchTree {
     }
 
     /* Let us create following BST
-              50
-           /     \
-          30      70
-         /  \    /  \
-       20   40  60   80 */
+              7
+           /   \
+          /     \
+         /       \
+        1         9
+      /  \       / \
+     0    3     8  10
+        /  \
+       2   5
+         /  \
+        4   6
+
+     */
+
+    //In order: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+    @Test
+    public void testTraverseInOrderRecursive() {
+
+        List<Node<Integer>> current = getIntegerBinarySearchTree().inOrderRecursive();
+
+        List<Integer> expected = Arrays.asList( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        checkLists(current, expected);
+
+    }
+
+    /* Let us create following BST
+              7
+           /   \
+          /     \
+         /       \
+        1         9
+      /  \       / \
+     0    3     8  10
+        /  \
+       2   5
+         /  \
+        4   6
+
+     */
+
+    //In order: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
     @Test
     public void testTraverseInOrder() {
 
+        List<Node<Integer>> current = getIntegerBinarySearchTree().inOrder();
 
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>(comparator);
-        bst.add(50);
-        bst.add(30);
-        bst.add(70);
-        bst.add(20);
-        bst.add(40);
-        bst.add(60);
-        bst.add(80);
+        List<Integer> expected = Arrays.asList( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
-        List<Node<Integer>> inOrder = bst.preOrder();
-
-        List<Integer> expected = Arrays.asList(20,30,40,50,60, 70,80);
-
-        for (int i = 0; i < inOrder.size(); i++) {
-            Assert.assertTrue(inOrder.get(i).getValue().equals(expected.get(i)));
-        }
+        checkLists(current, expected);
 
     }
+
+    /* Let us create following BST
+              7
+           /   \
+          /     \
+         /       \
+        1         9
+      /  \       / \
+     0    3     8  10
+        /  \
+       2   5
+         /  \
+        4   6
+
+     */
+
+    //Pre order: 7, 1, 0, 3, 2, 5, 4, 6, 9, 8, 10
+    @Test
+    public void testTraversePreOrder() {
+
+        List<Node<Integer>> current = getIntegerBinarySearchTree().preOrder();
+
+        List<Integer> expected = Arrays.asList(7, 1, 0, 3, 2, 5, 4, 6, 9, 8, 10);
+
+        checkLists(current, expected);
+    }
+
+        /* Let us create following BST
+              7
+           /   \
+          /     \
+         /       \
+        1         9
+      /  \       / \
+     0    3     8  10
+        /  \
+       2   5
+         /  \
+        4   6
+
+     */
+
+    //Pre order: 7, 1, 0, 3, 2, 5, 4, 6, 9, 8, 10
+    @Test
+    public void testTraversePreOrderRecursive() {
+
+        List<Node<Integer>> current = getIntegerBinarySearchTree().preOrderRecursive();
+
+        List<Integer> expected = Arrays.asList(7, 1, 0, 3, 2, 5, 4, 6, 9, 8, 10);
+
+        checkLists(current, expected);
+    }
+
+    /* Let us create following BST
+              7
+           /   \
+          /     \
+         /       \
+        1         9
+      /  \       / \
+     0    3     8  10
+        /  \
+       2   5
+         /  \
+        4   6
+
+     */
+
+    //Post order: 0, 2, 4, 6, 5, 3, 1, 8, 10, 9, 7
+    @Test
+    public void testTraversePostOrder() {
+
+        List<Node<Integer>> current = getIntegerBinarySearchTree().postOrder();
+
+        List<Integer> expected = Arrays.asList(0, 2, 4, 6, 5, 3, 1, 8, 10, 9, 7);
+
+        checkLists(current, expected);
+    }
+
+    /* Let us create following BST
+              7
+           /   \
+          /     \
+         /       \
+        1         9
+      /  \       / \
+     0    3     8  10
+        /  \
+       2   5
+         /  \
+        4   6
+
+     */
+
+    //Post order: 0, 2, 4, 6, 5, 3, 1, 8, 10, 9, 7
+    @Test
+    public void testTraversePostOrderRecursive() {
+
+        List<Node<Integer>> current = getIntegerBinarySearchTree().postOrderRecursive();
+
+        List<Integer> expected = Arrays.asList(0, 2, 4, 6, 5, 3, 1, 8, 10, 9, 7);
+
+        checkLists(current, expected);
+    }
+
+    private BinarySearchTree<Integer> getIntegerBinarySearchTree() {
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>(comparator);
+        bst.add(7);
+        bst.add(1);
+        bst.add(9);
+        bst.add(0);
+        bst.add(3);
+        bst.add(8);
+        bst.add(10);
+        bst.add(2);
+        bst.add(5);
+        bst.add(4);
+        bst.add(6);
+        return bst;
+    }
+
+    private static Comparator<Integer> comparator = new Comparator<Integer>() {
+        @Override
+        public int compare(Integer v1, Integer v2) {
+            return v1 < v2 ? -1 : v1 > v2 ? +1 : 0;
+        }
+    };
+
+    private void checkLists(List<Node<Integer>> current, List<Integer> expected) {
+        for (int i = 0; i < current.size(); i++) {
+            Assert.assertTrue(current.get(i).getValue().equals(expected.get(i)));
+        }
+    }
+
 
 }
