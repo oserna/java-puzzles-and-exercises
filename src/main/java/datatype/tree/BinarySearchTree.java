@@ -2,23 +2,23 @@ package datatype.tree;
 
 import java.util.*;
 
-public class BinarySearchTree<T> {
+public class BinarySearchTree<T> extends BinaryTree<T>{
 
-    private  Node<T> head;
     private Comparator<T> comparator;
 
-    public BinarySearchTree(Comparator<T> comparator){
+    public BinarySearchTree(Node<T> root, Comparator<T> comparator){
+        super(root);
         this.comparator = comparator;
     }
 
     public void add(T value) {
 
-        if (head == null) {
-            head = new Node<T>(value);
+        if (root == null) {
+            root = new Node<T>(value);
             return;
         }
 
-        add(value, head);
+        add(value, root);
 
     }
 
@@ -51,17 +51,13 @@ public class BinarySearchTree<T> {
         }
     }
 
-    public Node<T> tree(){
-        return head;
-    }
-
     public List<Node<T>> preOrder(){
 
         final List<Node<T>> preOrder = new ArrayList<>();
 
         final Deque<Node<T>> nodes = new ArrayDeque<>();
 
-        nodes.addFirst(head);
+        nodes.addFirst(root);
 
         while (!nodes.isEmpty()){
 
@@ -96,7 +92,7 @@ public class BinarySearchTree<T> {
 
         final ArrayDeque<Node<T>> nodes = new ArrayDeque<>();
 
-        nodes.addFirst(head);
+        nodes.addFirst(root);
 
         while (nodes.size() > 0) {
 
@@ -136,7 +132,7 @@ public class BinarySearchTree<T> {
 
         final Deque<Node<T>> nodes = new ArrayDeque<>();
 
-        nodes.addFirst(head);
+        nodes.addFirst(root);
 
         while(!nodes.isEmpty()){
 
@@ -166,15 +162,15 @@ public class BinarySearchTree<T> {
     }
 
     public List<Node<T>> inOrderRecursive(){
-        return traverseInOrder(head, new ArrayList<>());
+        return traverseInOrder(root, new ArrayList<>());
     }
 
     public List<Node<T>> preOrderRecursive(){
-        return traversePreOrder(head, new ArrayList<>());
+        return traversePreOrder(root, new ArrayList<>());
     }
 
     public List<Node<T>> postOrderRecursive(){
-        return traversePostOrder(head, new ArrayList<>());
+        return traversePostOrder(root, new ArrayList<>());
     }
 
     private List<Node<T>> traversePostOrder(Node<T> node, List<Node<T>> list) {

@@ -11,9 +11,9 @@ public class TestBinarySearchTree {
     @Test
     public void testAddJustRoot() {
 
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>(comparator);
-        bst.add(6);
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>(new Node<>(6),comparator);
         Assert.assertTrue(bst.tree().getValue().equals(6));
+
     }
 
     /* Let us create following BST
@@ -175,8 +175,7 @@ public class TestBinarySearchTree {
     }
 
     private BinarySearchTree<Integer> getIntegerBinarySearchTree() {
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>(comparator);
-        bst.add(7);
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>(new Node<Integer>(7), comparator);
         bst.add(1);
         bst.add(9);
         bst.add(0);
