@@ -31,47 +31,51 @@ public class BinaryTree<T> {
     public List<Node<T>> boundaries() {
 
         Set<Node<T>> boundaries = new LinkedHashSet<>();
-
-        List<List<Node<T>>> layers = new ArrayList<>();
+        boundaries.add(root);
 
         Deque<Node<T>> nodes = new ArrayDeque<>();
-        nodes.addLast(root);
 
+        Node<T> node = root;
+        while( (node = node.getLeft()) != null ) {
+            nodes.addLast(node);
+        }
+
+        boundaries.addAll(nodes);
+
+        nodes.addLast(root);
         while(!nodes.isEmpty()) {
 
-            List<Node<T>> layer = new ArrayList<>();
+            Node<T> first = nodes.peekFirst();
 
-            for (int i = 0; i < nodes.size(); i++) {
-
-                Node<T> first = nodes.removeFirst();
-
-                Node<T> left = first.getLeft();
-                Node<T> right = first.getRight();
-
-                if (left != null) {
-                    nodes.addLast(left);
-                    layer.add(left);
-                }
-
-                if (right != null) {
-                    nodes.addLast(right);
-                    layer.add(right);
-                }
-
+            Node<T> left = first.getLeft();
+            if(left != null && !left.isVisited()) {
+                nodes.addFirst(left);
+                continue;
             }
 
-            layers.add(layer);
+            Node<T> right = first.getRight();
+            if(right != null && !right.isVisited()) {
+                nodes.addFirst(right);
+                continue;
+            }
+
+            first.setVisited(true);
+
+            if (left == null && right == null) {
+                boundaries.add(first);
+            }
+
+            nodes.removeFirst();
 
         }
 
-        for (List<Node<T>> layer : layers) {
-            boundaries.add(layer.get(0));
+
+        node = root;
+        while( (node = node.getRight()) != null ) {
+               nodes.addFirst(node);
         }
 
-        for (int i = layers.size(); i > 0; i--) {
-            List<Node<T>> layer = layers.get(i - 1);
-            boundaries.add(layer.get(layer.size()-1));
-        }
+        boundaries.addAll(nodes);
 
         return new ArrayList<>(boundaries);
     }
