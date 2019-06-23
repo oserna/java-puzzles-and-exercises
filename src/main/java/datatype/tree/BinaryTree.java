@@ -33,16 +33,14 @@ public class BinaryTree<T> {
         Set<Node<T>> boundaries = new LinkedHashSet<>();
         boundaries.add(root);
 
-        Deque<Node<T>> nodes = new ArrayDeque<>();
-
         Node<T> node = root;
         while( (node = node.getLeft()) != null ) {
-            nodes.addLast(node);
+            boundaries.add(node);
         }
 
-        boundaries.addAll(nodes);
-
+        Deque<Node<T>> nodes = new ArrayDeque<>();
         nodes.addLast(root);
+
         while(!nodes.isEmpty()) {
 
             Node<T> first = nodes.peekFirst();
