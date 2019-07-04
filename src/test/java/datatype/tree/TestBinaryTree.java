@@ -48,7 +48,46 @@ public class TestBinaryTree {
         checkLists(list,expected);
     }
 
-    private void checkLists(List<Node<Integer>> current, List<Integer> expected) {
+    /*
+        Ex 2: the top view of the below binary tree is B A C F:
+
+          A
+        /   \
+       B     C
+         \
+          D
+           \
+            E
+             \
+              F
+     */
+    @Test
+    public void testTopView(){
+
+        Node<String> a = new Node<>("A");
+        a.setRight(new Node<String>("C"));
+
+        Node<String> b = new Node<>("B");
+        Node<String> d = new Node<>("D");
+        Node<String> e = new Node<>("E");
+        Node<String> f = new Node<>("F");
+
+        a.setLeft(b);
+        b.setRight(d);
+        d.setRight(e);
+        e.setRight(f);
+
+        BinaryTree<String> bt = new BinaryTree<>(a);
+
+        List<Node<String>> list = bt.topView();
+
+        List<String> expected = Arrays.asList("B", "A", "C", "F");
+
+        checkLists(list,expected);
+
+    }
+
+    private <T> void checkLists(List<Node<T>> current, List<T> expected) {
         for (int i = 0; i < current.size(); i++) {
             Assert.assertTrue(current.get(i).getValue().equals(expected.get(i)));
         }
